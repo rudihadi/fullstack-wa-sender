@@ -41,5 +41,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api", routes);
+// app.use("/api/auth", authRoutes); // ======
+
+const errorHandler = require("./middlewares/error.middleware");
+app.use(errorHandler);
 
 module.exports = app;

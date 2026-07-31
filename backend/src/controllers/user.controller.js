@@ -9,7 +9,7 @@ const getAllUsers = async (req, res) => {
   });
 };
 
-const createUser = async (req, res) => {
+const createUser = async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
     const user = await userService.createUser({ name, email, password });
@@ -19,10 +19,7 @@ const createUser = async (req, res) => {
       data: user,
     });
   } catch (error) {
-    return res.status(409).json({
-      success: false,
-      message: error.message,
-    });
+    next(error);
   }
 };
 
